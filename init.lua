@@ -158,7 +158,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 999
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -195,6 +195,18 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Yank into system clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y') -- yank motion
+vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"+Y') -- yank line
+
+-- Delete into system clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>d', '"+d') -- delete motion
+vim.keymap.set({ 'n', 'v' }, '<leader>D', '"+D') -- delete line
+
+-- Paste from system clipboard
+vim.keymap.set('n', '<leader>p', '"+p') -- paste after cursor
+vim.keymap.set('n', '<leader>P', '"+P') -- paste before cursor
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -242,6 +254,7 @@ require('lspconfig').lua_ls.setup {
     Lua = {},
   },
 }
+require('lspconfig').astro.setup {}
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
